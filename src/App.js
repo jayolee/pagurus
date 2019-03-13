@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import './App.scss';
 import NewRequest from './newRequest.js'
+import NewMentor from './newMentor.js'
 import MsgRow from './msgRow.js'
 import Msg from './msg.js'
 import set from './images/settings.svg'
 import bg from './images/bg.svg'
 import mentee from './images/mentee.svg'
+import mentor from './images/mentor.svg'
 class App extends Component {
   constructor(props) {
     super(props);
@@ -14,6 +16,9 @@ class App extends Component {
       transform:0,
       setTrans: 0,
       lstmsg: "",
+      lastname: "",
+      alertanim: 0,
+      altdis: 1,
     }
     this.checked = ["false", "true"];
     this.display = ["", "none"];
@@ -28,29 +33,44 @@ class App extends Component {
       height -= 145;
     }
     this.transform[1] = "translateY(" + height + "px)";
-    console.log(this.transform);
   }
   pageRender() {
     switch(this.state.page){
       case 0:
-      // return <MsgRow />;
       return;
       case 1:
-        return <NewRequest />;
+        return <NewRequest closeWindow = {this.closeWindow.bind(this)} setalert = {this.setalert.bind(this)}/>;
       case 2:
-        return <Msg closeWindow = {this.closeWindow.bind(this)}/>;  
+        return <Msg closeWindow = {this.closeWindow.bind(this)} name = {this.state.lastname} msg = {this.state.lstmsg}/>;  
+      case 3:
+        return  <NewMentor closeWindow = {this.closeWindow.bind(this)}/>;
       default:
       return;
     }
   }
-  msgsend(msg){
-    this.setState({page: 2, lstmsg: msg})
+  msgsend(i, msg = null, name=null){
+    this.setState({lstmsg: msg, lastname: name });
+    setTimeout(function () {
+      this.setState({page: i});
+    }.bind(this), 50);
   }
   settingClick(e) {
     this.setState({transform: !(this.state.transform)});
   }
   closeWindow(){
     this.setState({page: 0})
+  }
+  setalert(){
+    this.setState({altdis: 0, alertanim: 1});
+    // setTimeout(function () {
+    //   this.setState({alertanim: 1});
+    // }.bind(this), 10);
+    setTimeout(function () {
+      this.setState({alertanim: 0});
+    }.bind(this), 900);
+    setTimeout(function () {
+      this.setState({alertdis: 1});
+    }.bind(this), 950);
   }
   render() {
     return (
@@ -69,9 +89,9 @@ class App extends Component {
               </div>
               <div className = "option">
               <div className = "title">Accept Mentor Request</div>
-              <label class="switch">
+              <label className="switch">
                 <input type="checkbox" key = "checkbox" checked={this.checked[this.state.acpMent]} onClick = {(ev) => this.setState({acpMent: (this.state.acpMent -1)*(-1)})}/>
-                <span class="slider round" />
+                <span className="slider round" />
               </label>
               </div>
 
@@ -104,10 +124,16 @@ class App extends Component {
               </div>
               <div key="msgRow" className = "msgList" style={{transform: this.transform[this.state.transform]}} onClick = {(ev) => {if(this.state.transform === 1){this.setState({transform: 0})}}}>
                 <MsgRow msgsend={this.msgsend.bind(this)} />
+                <div className="mentbtn" onClick = {(ev) => {this.setState({page: 3})}}>
+                  <img src={mentor} />
+                </div>
               </div>
               {this.pageRender()}
             </div>
             <div className = "topbar" />
+            <div className= "notification" key="notif" style={{opacity:this.state.alertanim, display:this.display[this.state.altdis]}}>
+              Sent
+            </div>
         </div>
     );
   }

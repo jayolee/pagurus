@@ -14,11 +14,14 @@ class NewRequest extends Component {
       this.setState({msg: i});
       return;
   }
+  closeWindow() {
+    this.props.closeWindow();
+  }
   writeMsg() {
     if(this.state.msg === 1) {
-        return <LvMsg closeMsg = {this.closeMsg.bind(this)} />;
+        return <LvMsg closeMsg = {this.closeMsg.bind(this)} closewindow = {this.closeWindow.bind(this)} setalert={this.props.setalert.bind(this)}/>;
     } else if(this.state.msg === 2) {
-      return <Msg closeMsg = {this.closeMsg.bind(this)} />;
+      return <Msg closeWindow = {this.closeWindow.bind(this)} name = "Su Jin Kim" msg = ""/>;
     } else {
         return;
     }
@@ -26,7 +29,7 @@ class NewRequest extends Component {
   render() {
     return (
             <div className = "newRequest">
-              <div className="xmark" >
+              <div className="xmark" onClick={this.props.closeWindow.bind(this)}>
                 <svg width="25" height="25">
                 <path d="M0 0 L25 25 M25 0 L0 25" />
                 </svg>
@@ -42,7 +45,7 @@ class NewRequest extends Component {
                   Su Jin Kim
                 </div>
                 <div className = "commonGr">
-                Su Jin also went to <span class="bold">ABC University!</span>
+                Su Jin also went to <span className="bold">ABC University!</span>
                 </div>
                 <div className = "message">
                 Hi, I am Su Jin, MHCI class of 2019. I have some questions about moving to Pittsburgh and what I need to prepare before the program starts.

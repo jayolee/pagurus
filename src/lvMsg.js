@@ -19,14 +19,21 @@ class LvMsg extends Component {
     setTimeout(function () {this.setState({opacity:0})}.bind(this), 100);
     setTimeout(function () {this.props.closeMsg(0)}.bind(this),300);
   }
+  appendMsg() {
+      this.props.setalert();
+      this.closeComp();
+      this.props.closewindow();
+      
+}
   render() {
     return (
         <div>
             <div className ="msgWrap" onClick = {this.closeComp.bind(this)} />
             <div className = "lvMsg" key = "msg" style={{opacity:this.state.opacity, transform:this.state.transform}}>
-            <textarea autofocus placeholder = "Leave message to Su Jin" />
+            <textarea autoFocus placeholder = "Leave message to Su Jin" onKeyPress= {(ev) => {
+                    if(ev.key === "Enter"){this.appendMsg()}}}/>
             <div className = "btnwrapper">
-                <div className = "btn colr">
+                <div className = "btn colr" onClick={this.appendMsg.bind(this)}>
                 Send
                 </div>
             </div>
