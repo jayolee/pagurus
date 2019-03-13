@@ -2,7 +2,7 @@
   "name": "paragus",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://pagurus.github.io/react-gh-pages",
+  "homepage": "http://jayolee.github.io/pagurus",
   "dependencies": {
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
