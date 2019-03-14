@@ -4,28 +4,24 @@ self.__precacheManifest = [
     "url": "/pagurus/static/media/longbg.11440591.svg"
   },
   {
-    "revision": "f896c3ce50877ed5ddfb",
-    "url": "/pagurus/static/css/main.84b1d1d6.chunk.css"
+    "revision": "57a44738c91e36590558",
+    "url": "/pagurus/static/css/main.1c44c53b.chunk.css"
   },
   {
     "revision": "c09856cf3326f78cc03f",
     "url": "/pagurus/static/js/runtime~main.fc19ff34.js"
   },
   {
-    "revision": "d224087bd7705d815706",
-    "url": "/pagurus/static/js/2.f391d193.chunk.js"
+    "revision": "2d966cfb0e0a42ed6478",
+    "url": "/pagurus/static/js/2.7963e361.chunk.js"
   },
   {
     "revision": "612ce1bbe2a30db63dc8a5c8f13d7973",
     "url": "/pagurus/static/media/mentee.612ce1bb.svg"
   },
   {
-    "revision": "f896c3ce50877ed5ddfb",
-    "url": "/pagurus/static/js/main.1a1ad047.chunk.js"
-  },
-  {
-    "revision": "046bbf5e8ae686583d16ce7427bfc148",
-    "url": "/pagurus/static/media/settings.046bbf5e.svg"
+    "revision": "57a44738c91e36590558",
+    "url": "/pagurus/static/js/main.8abc6fcd.chunk.js"
   },
   {
     "revision": "6fbbdf47646eeaffcf23e0bf8a343b6c",
@@ -36,11 +32,15 @@ self.__precacheManifest = [
     "url": "/pagurus/static/media/mountain.19465697.svg"
   },
   {
+    "revision": "046bbf5e8ae686583d16ce7427bfc148",
+    "url": "/pagurus/static/media/settings.046bbf5e.svg"
+  },
+  {
     "revision": "b0c46272c1d4a0774cf4ca9450667dab",
     "url": "/pagurus/static/media/mentor.b0c46272.svg"
   },
   {
-    "revision": "7bbf9633fd0b887ab978d939246d3810",
+    "revision": "bf7251b9e72d641afd039dc3cdf426ca",
     "url": "/pagurus/index.html"
   }
 ];
