@@ -376,6 +376,7 @@ html, body {
                         font-size: 12px;
                     }
                     &.newline{
+                        cursor: pointer;
                         border-bottom: none;
                         justify-content: left;
                         align-items: center;
@@ -682,6 +683,7 @@ html, body {
         margin-top: 16px;
         padding: 10px 20px;
         border-radius: 40px;
+        letter-spacing: .5px;
         cursor: pointer;
         font: {
             weight: 700;
@@ -697,6 +699,7 @@ html, body {
         }
         &.outline{
             border: 2px solid #ff614c;
+            color: $btncolor;
         }
     }
     .mentbtn{
@@ -739,6 +742,7 @@ html, body {
         display: flex;
         flex-direction: row;
         align-items:center;
+        line-height: 1.5;
         @include positions(0,null,null,0);
         .message{
             width: 25%;
@@ -762,7 +766,25 @@ html, body {
                 margin-top: 10px;
             }
 
+            .signupwrap{
+                height: 300px;
+                width:300%;
+                display: flex;
+                align-items: center;
+                height: 100vh;
+                max-height: 847px;
+            }
         .signup{
+            width:33.3%;
+            padding: 12vh 16px 0;
+            transition: .3s;
+            position: relative;
+            height: 100%;
+            &.anim{
+                position: absolute;
+                top:50%;
+                left:100%;
+            }
             .title, .discrip{
                 width: 100%;
                 margin:0 auto;
@@ -806,15 +828,15 @@ html, body {
                 }
             }
             .btnwrapper{
-                position: relative;
-                margin-top: 30px;
+                position: absolute;
+                @include positions(null,0,32px);
                 width: 100%;
-                padding:0;
+                padding:0 16px;
                 .btn{
                     margin: 0 16px;
                     &.emp{
                         padding: {
-                            right: 0;
+                            right: 10px;
                             left: 0;
                         }
                     }
@@ -824,7 +846,7 @@ html, body {
                 }
                 &.select{
                     justify-content: flex-end;
-                    padding: 0;
+                    padding: 0 16px;
                     .btn{
                         margin: 0 8px;
                     }
@@ -871,6 +893,7 @@ html, body {
                         justify-content: left;
                         align-items: center;
                         font-weight: 700;
+                        cursor: pointer;
                         svg{
                             stroke-linecap: round;
                             stroke-width: 2px;
@@ -974,4 +997,54 @@ html, body {
         }
     
     }
+}
+.addSchool{
+    background: #fff2eb;
+    width: 300%;
+    height: 100vh;
+    max-height: 847px;
+    position: fixed;
+    transition: .3s;
+    @include positions(0,null ,null,0 );
+    .addSchoolWrap{
+        transition: .3s;
+        display: flex;
+        align-items: center;
+        height: 100vh;
+        max-height: 847px;
+        position: relative;
+        left:0;
+    }
+    .xmark{
+        cursor: pointer;
+        position:fixed;
+        @include positions( 56px, null,null,calc(33.3% - 48px));
+        opacity: .8;
+        svg{
+            path{
+                stroke:#1f0000;
+                stroke-width: 3px;
+            }
+        }
+        cursor: pointer;
+    }
+}
+.instruction{
+    min-width: 120px;
+    text-align: center;
+    width:auto;
+    transition: .3s;
+    line-height:1.6;
+    position:fixed;
+    top:50%;
+    left:50%;
+    @include transform(translateX(-50%) translateY(-50%));
+    font: {
+        size: 14px;
+        weight: 700;
+    }
+    color: #fff;
+    padding:6px 16px;
+    background: #606060;
+    border-radius: 20px;
 }
