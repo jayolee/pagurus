@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.scss';
 import Msg from './msg.js'
 import mentee from './images/mentee.svg'
+
 class MsgRow extends Component {
   constructor(props) {
     super(props);
@@ -17,31 +18,47 @@ class MsgRow extends Component {
       mentedis: "",
       lstmsg : "",
       barWidth: 0,
+      nwdis: "",
     }
     this.active = ["", "active"];
     this.barWidth = ["36px", "75px", "75px"];
-    this.barLeft = ["24.2px", "73.5px", "158.5px"];
+    this.barLeft = ["24.2px", "78.5px", "173.5px"];
   }
 
   filter(e) {
       if(e.clientY < 300){
     let keyval = e.target.id - 1;
+    if(keyval === 2){
+      if(this.props.getacpMent() === 1){
+        let actarr = [0, 0, 0]
+        actarr[keyval] = 1;
+        this.setState({btnact: actarr, barWidth: keyval});
+      }
+    }else{
     let actarr = [0, 0, 0]
     actarr[keyval] = 1;
     this.setState({btnact: actarr, barWidth: keyval});
+    if(this.props.getacpMent() === 0){
+      this.setState({mentOp: 0});
+        setTimeout(function () {this.setState({mentdis: "none", mentedis:"flex"})}.bind(this), 100);
+        setTimeout(function () {this.setState({menteOp: 1,})}.bind(this), 100);
+        return;
+    }
+    }
     
 
     switch(keyval){
       case 1:
-        this.setState({menteOp: 0});
-        setTimeout(function () {this.setState({mentedis: "none", mentdis:"flex"})}.bind(this), 100);
-        setTimeout(function () {this.setState({mentOp: 1,})}.bind(this), 100);
+        this.setState({mentOp: 0});
+        setTimeout(function () {this.setState({mentdis: "none", mentedis:"flex"})}.bind(this), 100);
+        setTimeout(function () {this.setState({menteOp: 1,})}.bind(this), 100);
         break;
       case 2:
-        this.setState({ mentOp: 0});
-        setTimeout(function () {this.setState({mentdis: "none", mentedis:"flex"})}.bind(this), 100);
-        setTimeout(function () {this.setState({menteOp: 1})}.bind(this), 110);
-       
+      if(this.props.getacpMent() === 1){
+        this.setState({ menteOp: 0});
+        setTimeout(function () {this.setState({mentedis: "none", mentdis:"flex"})}.bind(this), 100);
+        setTimeout(function () {this.setState({mentOp: 1})}.bind(this), 110);
+      }
         break;
       default:
         this.setState({mentedis:"flex", mentdis:"flex"});
@@ -74,17 +91,13 @@ class MsgRow extends Component {
     this.props.msgsend(2, msg, name);
   }
   newrequest(e){
-
     let msgdiv = e.target;
-
     for(let i = 0; i< 4; i++){
         if(msgdiv.className.includes("newrq")){
             break;
         }
         msgdiv = msgdiv.parentNode;
-    }
-    
-    
+    } 
     this.props.msgsend(1, "");
   }
   render() {
@@ -92,16 +105,17 @@ class MsgRow extends Component {
         <div>
                 <div className = "header">
                   <div key="filter1" id= "1" className = {"topbtn " + this.active[this.state.btnact[0]]} onClick={this.filter.bind(this)} >All</div>
-                  <div key="filter2" id= "2" className = {"topbtn " + this.active[this.state.btnact[1]]} onClick={this.filter.bind(this)}>Mentor</div>
-                  <div key="filter3" id= "3" className = {"topbtn " + this.active[this.state.btnact[2]]} onClick={this.filter.bind(this)}>Mentee</div>
+                  <div key="filter2" id= "2" className = {"topbtn " + this.active[this.state.btnact[1]]} onClick={this.filter.bind(this)}>Mentors</div>
+                  <div key="filter3" id= "3" className = {"topbtn " + this.active[this.state.btnact[2]]} onClick={this.filter.bind(this)}>Mentees</div>
                     <div className="headerBar" key="bar" style={{width:this.barWidth[this.state.barWidth], left:this.barLeft[this.state.barWidth]}}/>
                 </div>
 
                 <div className="msgwrapper">
+                <div style={{display: this.state.nwdis}}>
                   <div className = "msgRow mentee newrq" key="row1" style={{display:this.state.mentdis, opacity:this.state.mentOp}} onClick ={this.newrequest.bind(this)}>
                     New Request
                   </div>
-
+                  </div>
                   <div className = "msgRow mentor" key="row2" style={{display:this.state.mentedis, opacity:this.state.menteOp}} onClick ={this.rendermsg.bind(this)} name="Melissa" msg="You can take 3A.">
                     <img src={mentee} />
                     <div className = "msgName">

@@ -22,8 +22,9 @@ class App extends Component {
       altdis: 1,
       initanim: 100,
       initop: 0,
+      acpMent: 1,
     }
-    this.checked = ["false", "true"];
+    this.checked = [false, true];
     this.display = ["", "none"];
     this.transform = [" ", "0",  "translateY(50px)"];
     this.settransform = ["rotate(0)", "rotate(360deg)",];
@@ -79,6 +80,9 @@ class App extends Component {
     this.setState({initanim: 0});
     setTimeout(function () {this.setState({transform: 0, initop: 1})}.bind(this), 150);
   }
+  getacpMent(){
+    return this.state.acpMent;
+  }
   render() {
     return (
       <div className="screen">
@@ -98,7 +102,7 @@ class App extends Component {
               <div className = "option">
               <div className = "title">Accept Mentor Request</div>
               <label className="switch">
-                <input type="checkbox" key = "checkbox" checked={this.checked[this.state.acpMent]} onClick = {(ev) => this.setState({acpMent: (this.state.acpMent -1)*(-1)})}/>
+                <input type="checkbox" key = "checkbox" checked={this.checked[this.state.acpMent]} onClick = {(ev) => { this.setState({acpMent: Math.abs((this.state.acpMent - 1))})}}/>
                 <span className="slider round" />
               </label>
               </div>
@@ -131,7 +135,7 @@ class App extends Component {
               </div>
               </div>
               <div key="msgRow" className = "msgList" style={{transform: this.transform[this.state.transform], opacity: this.state.initop}} onClick = {(ev) => {if(this.state.transform === 1){this.setState({transform: 0})}}}>
-                <MsgRow msgsend={this.msgsend.bind(this)} />
+                <MsgRow msgsend={this.msgsend.bind(this)} getacpMent = {this.getacpMent.bind(this)} />
                 <div className="mentbtn" onClick = {(ev) => {this.setState({page: 3})}}>
                   <img src={mentor} />
                 </div>

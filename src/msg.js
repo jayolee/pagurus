@@ -19,7 +19,7 @@ class Msg extends Component {
   }
   componentDidMount() {
     this.setState({opacity:1});
-    setTimeout(function () { this.setState({openmov:"0"}) }.bind(this), 50);
+    setTimeout(function () { this.setState({openmov:"24px"}) }.bind(this), 50);
     if(this.props.name){
     this.setState({savedmsg: this.props.msg, savedname: this.props.name});
     }   
@@ -62,7 +62,7 @@ class Msg extends Component {
                         <img src={mentee} key="name"/>{this.state.savedname}
                     </div>
 
-                    <div className="xmark" onClick ={this.props.closeWindow.bind(this)}>
+                    <div className="xmark" onClick ={(ev) => {this.props.closeWindow(); if(this.props.closeOnBoard){this.props.closeOnBoard()}}}>
                         <svg width="20" height="20">
                         <path d="M0 0 L20 20 M20 0 L0 20" />
                         </svg>
@@ -73,14 +73,14 @@ class Msg extends Component {
                 {this.generateMsg()}
               </div>
               <div className = "msgtype">
-                <img src={camera} />
-                <img src={photo} />
+                <img src={camera} style={{cursor:"pointer"}}/>
+                <img src={photo} style={{cursor:"pointer"}}/>
                 <input id="inputbox" type = "text" autoFocus placeholder = "Type message" onFocus={this.inputFocus.bind(this)} onKeyPress= {(ev) => {
                     if(ev.key === "Enter"){this.appendMsg()}}}/>
                 <div className = "sendbtn" onClick={this.appendMsg.bind(this)}>
-                    <svg width="16" height="16">
-                        <path d="M10 0 L16 8 L8 16" />
-                        <path d="M0 8 L16 8" />
+                    <svg width="20" height="20">
+                        <path d="M12 2 L18 10 L12 18" />
+                        <path d="M2 10 L18 10" />
                     </svg>
                 </div>
               </div>

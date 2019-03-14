@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.scss';
 import SignUp from './signup.js'
 import lbg from './images/longbg.svg'
+import logogra from './images/logo_gradient.svg'
+import bg1 from './images/bg1.png'
 class Onboard extends Component {
   constructor(props) {
     super(props);
@@ -30,6 +32,7 @@ class Onboard extends Component {
     this.displayfoot = ['flex', 'none'];
     this.sign_op = [1, 0.1];
     this.sign_bg = ["#fff2eb", "#fff5f2"];
+    this.topbar = ["#f33f2b", "#ffdad0" ]
 
   }
   componentDidMount(){
@@ -37,11 +40,12 @@ class Onboard extends Component {
   }
   movingNext(){
     let curnum = this.state.curnum;
+    
       if(curnum !== 2){
         this.classLists[curnum] = "";
-    this.setState({left: this.state.left - 100, curnum: curnum += 1, prev: 1, next: 1, opacity:0, bg : 0});
-    this.classLists[curnum] = "active";
-    if(curnum === 2){
+        this.classLists[curnum + 1] = "active";
+    this.setState({left: this.state.left - 100, curnum: curnum + 1, prev: 1, next: 1, opacity:0, bg : 0});
+    if(curnum === 1){
         this.setState({next: 0, opacity:1, bg: 1})
     }
     }   
@@ -50,11 +54,11 @@ class Onboard extends Component {
     let curnum = this.state.curnum;
     if(curnum !== 0){
       this.classLists[curnum] = "";
-    this.setState({left: this.state.left + 100, curnum: curnum -= 1, prev: 1, next: 1, opacity:0, bg : 0});
-    this.classLists[curnum] = "active";
-    if(this.state.curnum === 0){
-        this.setState({prev: 0})
-    }
+      this.classLists[curnum - 1] = "active";
+    this.setState({left: this.state.left + 100, curnum: curnum - 1, prev: 1, next: 1, opacity:0, bg : 0});
+    if(this.state.curnum === 1){
+      this.setState({prev: 0});
+  }
     }
   }
   closeOnBoard(){
@@ -71,7 +75,7 @@ class Onboard extends Component {
 }
 returnSignUp(){
   if(this.state.signup === 1){
-  return <SignUp setInstruction = {this.setInstruction.bind(this)}/>;
+  return <SignUp setInstruction = {this.setInstruction.bind(this)} closeOnBoard = {this.closeOnBoard.bind(this)}/>;
 }
 }
   render() {
@@ -82,19 +86,19 @@ returnSignUp(){
             <div className = "messages" key="onboard" style ={{left: this.state.left+"%"}}>
             
               <div className = "message first">
-              <div className = "infographic" />
+              <div className = "infographic main" ><img id="mainLogo" src={logogra } /></div>
               <div className = "title">Find the Best Life Mentor</div>
               
               </div>
 
             <div className = "message second">
-            <div className = "infographic" />
+            <div className = "infographic "> <img src={bg1} id="bg1"/> </div>
               <div className = "title">First time moving to a new country?</div>
               <div className="descrip"> We find you the best life mentor who has the most common background with you</div>
               </div>
 
               <div className = "message third" key="thirdmsg" style={{display:this.display[this.state.signup]}}>
-              <div className = "infographic" />
+              <div className = "infographic second" />
               <div className = "title">Build professional relationship with your future cohort</div>
               <div className="descrip">Help your future cohort and start the professional relationship</div>
               </div>
@@ -131,7 +135,7 @@ returnSignUp(){
             <div className= "instruction" key="notif" style={{opacity:this.state.alertanim, display:this.display[this.state.altdis]}}>
               {this.state.alert}
             </div>
-            <div className = "topbar" />
+            <div className = "topbar" style={{background: this.topbar[this.state.signup]}}/>
         </div>
     );
   }

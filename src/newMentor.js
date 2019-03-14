@@ -73,7 +73,7 @@ class NewMentor extends Component {
                   Tell us about yourself.
                 </div>
                 <div className = "label">
-                  <span>I'll start studying at</span>
+                  <span>I start studying at</span>
                   <div class="school" id="autocomplete">
                     <input type="text" id="school" onKeyUp={this.keyfunc.bind(this)} autoFocus placeholder="ABC University" />
                     <ul id="auto-result" key="autolist" style={{display:this.display[this.state.display]}}></ul>

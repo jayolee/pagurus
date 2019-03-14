@@ -49,7 +49,7 @@ $boxshadow: 0 0 20px rgba(249, 97, 76, .5);
     }
 }
 
-div, a, textarea, input, select{
+div, a, textarea, input, select, img{
     box-sizing: border-box;
 }
 html, body {
@@ -253,6 +253,7 @@ html, body {
             flex-direction: column;
             padding:0 16px 16px;
             .msgRow{
+                cursor: pointer;
                 width: 100%;
                 display: flex;
                 flex-direction: row-reverse;
@@ -313,7 +314,9 @@ html, body {
                 fill: none;
                 stroke-width: 2px;
                 stroke: #fff;
+                cursor: pointer;
             }
+
         }
     }
     .setting{
@@ -684,6 +687,7 @@ html, body {
         padding: 10px 20px;
         border-radius: 40px;
         letter-spacing: .5px;
+        box-shadow: 0 4px 4px rgba(249, 97, 76, 0.4);
         cursor: pointer;
         font: {
             weight: 700;
@@ -696,6 +700,7 @@ html, body {
         }
         &.emp {
             color: #ff614c;
+            box-shadow: none;
         }
         &.outline{
             border: 2px solid #ff614c;
@@ -725,9 +730,6 @@ html, body {
     position: relative;
     width: 100%;
     height: 100%;
-    .topbar{
-       background: #f33f2b;
-    }
     position: absolute;
     @include positions(0,null,null,0);
     img{
@@ -752,13 +754,48 @@ html, body {
                 size: 16px;
             }
             .infographic{
-                width: 80%;
-                height: 400px;
+                width: calc(100% + 32px);
+                height:59vh;
+                overflow-x :hidden;
+                position: relative;
+                @include transform(translateX(-16px));
+                &.main{
+                    height: 200px;
+                }
+                &.second{
+                    height: 100px;
+                }
+                img{
+                    &#mainLogo{
+                        width: 80%;
+                        height: 130px;
+                        position:absolute;
+                        top: 70px;
+                        left: 50%;
+                        @include transform(translateX(-52%));
+                    }
+                    &#bg1{
+                        position: absolute;
+                        width:660px;
+                        left: -50px;
+                        @include transform(rotate(10deg));
+                    }
+                }
             }
             .title{
                 max-width:300px;
                 font: {
                     weight:700;
+                }
+            }
+            &.first{
+                .title{
+                    width:100%;
+                    margin:0 auto;
+                    text-align: center;
+                    font: {
+                        weight: 300;
+                    }
                 }
             }
             .descrip{
@@ -776,10 +813,16 @@ html, body {
             }
         .signup{
             width:33.3%;
-            padding: 12vh 16px 0;
+            padding: 21vh 16px 0;
             transition: .3s;
             position: relative;
             height: 100%;
+            
+            #letstart{
+                width: 100%;
+                margin: 0 auto;
+                position: absolute;
+            }
             &.anim{
                 position: absolute;
                 top:50%;
@@ -905,10 +948,63 @@ html, body {
                 }
                 
             }  
+            .msgwrapper{
+                margin: 0;
+                .msgRow{
+                    cursor: pointer;
+                    background: #fff;
+                    color: $txtcolor;
+                    transition: .4s;
+                    line-height: 1.6;
+                    padding: 10px 16px;
+                    display:flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-bottom: 6px;
+                    border-radius: 6px;
+                    box-shadow: 0 2px 4px rgba(249, 97, 76, 0.4);
+    
+                    &.mentee{
+                        background: rgba(255, 190, 169, 0.2);
+                    
+                    }
+                    .imgwrap{
+                        width: 46px;
+                        height: 46px;
+                    img{
+                        display: inline-block;
+                        width: 46px;
+                    }
+                }
+                    .msgName{
+                        position: relative;
+                        width: calc(100% - 56px);
+                        font-size: 16px;
+                        .lstMgs{
+                            font-size: 12px;
+                            opacity: .6;
+                        }
+                    }
+                    .msgDate{
+                        position: absolute;
+                        @include positions(0,0);
+                        height: 47px;
+                        opacity: .5;
+                        text-align: right;
+                        font-size: 12px;
+                        width: 120px;
+                    }
+                }
+            }
         }
+
         .login{
             .infographic{
-                height: 300px;
+                height: 120px;
+                img{
+                    width: 100%;
+                    padding: 0 16px;
+                }
             }
             width: 100%;
             input{
@@ -928,11 +1024,12 @@ html, body {
                 width: 400%;
                 margin-bottom: 30px;
                 font: {
-                    size: 14px;
-                    weight: 400;
+                    size: 20px;
+                    weight: 300;
                 }
                 text-align: center;
                 color: $txtcolor;
+                opacity: .7;
             }
         }
         }
@@ -998,6 +1095,74 @@ html, body {
     
     }
 }
+.newRequest.mentor{
+    position:fixed;
+    left:0;
+    top:0;
+    transition: .2s;
+    @include positions(0, 0);
+    width:100%;
+    height:100vh;
+    max-height: 847px;
+    background:#fff5f2;
+    line-height:1.6;
+    text-align: center;
+    color: $txtcolor;
+    .msg{
+        img{
+            position: relative;
+        }
+        input{
+            width: calc(100% - 130px);
+        }
+    }
+    .mainContent{
+        width:100%;
+        height: 100vh;
+        margin:0 auto;
+        padding-top: calc(56px + 10vh);
+        
+        .profilePic {
+            margin: 20px auto;
+            width: 100px;
+            height:100px;
+            img{
+                width:100px;
+                margin:0;
+                transform:none;
+                position: relative;
+            }
+        }
+        .userName {
+            font: {
+                size: 18px;
+                weight: 700;
+            }
+            margin-bottom: 15px;
+        }
+        .commonGr {
+            font: {
+                size: 14px;
+            }
+            opacity: .7;
+            margin-bottom: 30px;
+        }
+        .messageCon{
+            padding: 0 16px;
+            font-size: 14px;
+        }
+    }
+            .btnwrapper {
+                text-align: center;
+                width:100%;
+                position: fixed;
+                @include positions(null,50%,32px);
+                @include transform(translateX(50%));
+            .btn{
+                margin: 0 auto;
+            }
+            }
+}
 .addSchool{
     background: #fff2eb;
     width: 300%;
@@ -1045,6 +1210,6 @@ html, body {
     }
     color: #fff;
     padding:6px 16px;
-    background: #606060;
+    background: rgba(0,0,0,0.6);
     border-radius: 20px;
 }
