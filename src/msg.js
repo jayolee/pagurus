@@ -13,17 +13,19 @@ class Msg extends Component {
       height: "100vh",
       msglist: [],
       msgrnum : 0,
+      openmov: "50px",
+      opacity: "0"
     }
   }
   componentDidMount() {
     this.setState({opacity:1});
-    setTimeout(function () { this.setState({transform:"translateY(0)"}) }.bind(this), 50);
+    setTimeout(function () { this.setState({openmov:"0"}) }.bind(this), 50);
     if(this.props.name){
     this.setState({savedmsg: this.props.msg, savedname: this.props.name});
     }   
 }
   closeComp() {
-    this.setState({transform:"translateY(30vh)"});
+    this.setState({openmov:"50px"});
     setTimeout(function () {this.setState({opacity:0})}.bind(this), 100);
     setTimeout(function () {this.props.closeMsg(0)}.bind(this),300);
   }
@@ -54,7 +56,7 @@ class Msg extends Component {
   }
   render() {
     return (
-            <div className = "msg" key="msgbox" style={{height: this.state.height}}>
+            <div className = "msg" key="msgbox" style={{height: this.state.height, top: this.state.openmov, opacity:this.state.opacity}}>
                 <div className = "header">
                     <div className = "msgName">
                         <img src={mentee} key="name"/>{this.state.savedname}

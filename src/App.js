@@ -4,8 +4,9 @@ import NewRequest from './newRequest.js'
 import NewMentor from './newMentor.js'
 import MsgRow from './msgRow.js'
 import Msg from './msg.js'
+import Onboard from './onboarding.js'
 import set from './images/settings.svg'
-import bg from './images/bg.svg'
+import bg from './images/longbg.svg'
 import mentee from './images/mentee.svg'
 import mentor from './images/mentor.svg'
 class App extends Component {
@@ -13,16 +14,18 @@ class App extends Component {
     super(props);
     this.state = {
       page: 0,
-      transform:0,
+      transform:2,
       setTrans: 0,
       lstmsg: "",
       lastname: "",
       alertanim: 0,
       altdis: 1,
+      initanim: 100,
+      initop: 0,
     }
     this.checked = ["false", "true"];
     this.display = ["", "none"];
-    this.transform = [" ", "0",];
+    this.transform = [" ", "0",  "translateY(50px)"];
     this.settransform = ["rotate(0)", "rotate(360deg)",];
   }
   componentDidMount(){
@@ -72,11 +75,16 @@ class App extends Component {
       this.setState({alertdis: 1});
     }.bind(this), 950);
   }
+  initanimation(){
+    this.setState({initanim: 0});
+    setTimeout(function () {this.setState({transform: 0, initop: 1})}.bind(this), 150);
+  }
   render() {
     return (
       <div className="screen">
-        <div className = "mainbg">
+        <div className = "mainbg" key="mainbg" style={{left: this.state.initanim + "%"}}>
           <img className="bg" src={bg} />
+         
             <div className = "setting" >
               <div className = "header" >
                 <img src={set} key="settingIcon" id="settingIcon" style={{transform: this.settransform}} onClick={(ev) => this.setState({transform: (this.state.transform - 1) * (-1), setTrans:(this.state.setTrans - 1) * (-1)})} />
@@ -122,7 +130,7 @@ class App extends Component {
                 </div>
               </div>
               </div>
-              <div key="msgRow" className = "msgList" style={{transform: this.transform[this.state.transform]}} onClick = {(ev) => {if(this.state.transform === 1){this.setState({transform: 0})}}}>
+              <div key="msgRow" className = "msgList" style={{transform: this.transform[this.state.transform], opacity: this.state.initop}} onClick = {(ev) => {if(this.state.transform === 1){this.setState({transform: 0})}}}>
                 <MsgRow msgsend={this.msgsend.bind(this)} />
                 <div className="mentbtn" onClick = {(ev) => {this.setState({page: 3})}}>
                   <img src={mentor} />
@@ -134,6 +142,7 @@ class App extends Component {
             <div className= "notification" key="notif" style={{opacity:this.state.alertanim, display:this.display[this.state.altdis]}}>
               Sent
             </div>
+            <Onboard initanim = {this.initanimation.bind(this)}/>
         </div>
     );
   }

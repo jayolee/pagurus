@@ -7,8 +7,13 @@ class NewRequest extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      msg: 0, 
+      msg: 0,
+      openmov: "translateY(30px)",
+      opacity: 0,
     }
+  }
+  componentDidMount(){
+    setTimeout(function () { this.setState({opacity:1, openmov:"translateY(0)"}) }.bind(this), 2);
   }
   closeMsg(i) {
       this.setState({msg: i});
@@ -28,7 +33,7 @@ class NewRequest extends Component {
   }
   render() {
     return (
-            <div className = "newRequest">
+            <div className = "newRequest" key="newrequest" style={{transform:this.state.openmov, opacity:this.state.opacity}}>
               <div className="xmark" onClick={this.props.closeWindow.bind(this)}>
                 <svg width="25" height="25">
                 <path d="M0 0 L25 25 M25 0 L0 25" />

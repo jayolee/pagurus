@@ -73,7 +73,18 @@ class MsgRow extends Component {
     }
     this.props.msgsend(2, msg, name);
   }
-  newrequest(){
+  newrequest(e){
+
+    let msgdiv = e.target;
+
+    for(let i = 0; i< 4; i++){
+        if(msgdiv.className.includes("newrq")){
+            break;
+        }
+        msgdiv = msgdiv.parentNode;
+    }
+    
+    
     this.props.msgsend(1, "");
   }
   render() {
@@ -87,11 +98,11 @@ class MsgRow extends Component {
                 </div>
 
                 <div className="msgwrapper">
-                  <div className = "msgRow mentor newrq" key="row1" style={{display:this.state.mentdis, opacity:this.state.mentOp}} onClick ={this.newrequest.bind(this)}>
+                  <div className = "msgRow mentee newrq" key="row1" style={{display:this.state.mentdis, opacity:this.state.mentOp}} onClick ={this.newrequest.bind(this)}>
                     New Request
                   </div>
 
-                  <div className = "msgRow mentee" key="row2" style={{display:this.state.mentedis, opacity:this.state.menteOp}} onClick ={this.rendermsg.bind(this)} name="Melissa" msg="You can take 3A.">
+                  <div className = "msgRow mentor" key="row2" style={{display:this.state.mentedis, opacity:this.state.menteOp}} onClick ={this.rendermsg.bind(this)} name="Melissa" msg="You can take 3A.">
                     <img src={mentee} />
                     <div className = "msgName">
                     Melissa
@@ -104,7 +115,7 @@ class MsgRow extends Component {
                     </div>
                   </div>
 
-                  <div className = "msgRow mentor" key="row3" style={{display:this.state.mentdis, opacity:this.state.mentOp}} onClick ={this.rendermsg.bind(this)} name="Cathy" msg="You can take 71B.">
+                  <div className = "msgRow mentee" key="row3" style={{display:this.state.mentdis, opacity:this.state.mentOp}} onClick ={this.rendermsg.bind(this)} name="Cathy" msg="You can take 71B.">
                     <img src={mentee} />
                     <div className = "msgName">
                     Cathy
